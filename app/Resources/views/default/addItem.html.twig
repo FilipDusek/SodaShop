@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/admin/">Soda Shop</a>
+        </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-5">
+			<a class="btn btn-default navbar-btn" href="/admin/add/">Add new item</a>
+			<a class="btn btn-default navbar-btn" href="/admin/orders/">View orders</a>
+			<a class="btn btn-default navbar-btn" href="/admin/items/">View items</a>
+    </div>
+</nav>
+
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+
+
+
+<ol class="breadcrumb">
+  <li><a href="/admin/">Admin</a></li>
+  <li><a href="#">Add items</a></li>
+</ol>
+
+
+{% endblock %}

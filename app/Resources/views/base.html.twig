@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Soda Shop{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>        
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+        
+        <style>
+            body {background-color:#95a5a6}
+            .col-centered{
+                float: none;
+                margin: 0 auto;
+            }
+            .huge {
+                font-size: 10em;
+                font-weight: bold;
+                margin-bottom: 0.25em;
+            }
+
+            .popform.well{
+                margin-bottom: 0px;
+            }
+
+            .formContainer{
+                margin-top: 10px;
+            }
+
+            div>button.btn.btn-default{
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            label{
+                margin-right: 20px;
+                width: 10em;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-centered col-md-6">
+                <h1 class="huge">Soda <span class="lght">shop</span></h1>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        {% block body %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $("button").addClass("btn btn-default")
+            $( ".clickable" ).click(function(event) {
+            $("div.clickable").removeClass("active");
+            $(this).addClass("active");
+            
+            if ( $(this).next().is( ":hidden" ) ){
+                $("div.popform").hide();
+                $(this).next().slideDown("fast");
+            }
+        });
+        </script>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

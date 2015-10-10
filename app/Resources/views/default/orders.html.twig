@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/admin/">Soda Shop</a>
+        </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-5">
+            <a class="btn btn-default navbar-btn" href="/admin/add/">Add new item</a>
+            <a class="btn btn-default navbar-btn" href="/admin/orders/">View orders</a>
+            <a class="btn btn-default navbar-btn" href="/admin/items/">View items</a>
+    </div>
+</nav>
+
+    <div class="checkbox">
+        <label><input id="filterCheckbox" type="checkbox" checked>Show only new</label>
+    </div>
+    <table class="table">  
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Item name</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Control</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <th>{{ order.id }}</th>
+                    <th>{{ order.item.name }}</th>
+                    <th>{{ order.amount }}</th>
+                    <th class="status">{{ order.status }}</th>   
+                    <th>
+                        <a class="btn btn-sm btn-success" href="/admin/orders/accept/{{ order.id }}">Accept</a>
+                        <a class="btn btn-sm btn-danger" href="/admin/orders/decline/{{ order.id }}">Decline</a>
+                    </th>
+                </tr>
+            {% endfor %}
+        </tbody> 
+    </table>
+
+<ol class="breadcrumb">
+  <li><a href="/admin/">Admin</a></li>
+  <li><a href="#">Orders</a></li>
+</ol>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    $('#filterCheckbox').click(function() {
+        filter();        
+    });
+
+    //if checkbox checked, filter out rows that have status != new
+    function filter(){
+    $( "table>tbody>tr" ).each(function( index ) {
+        if($("#filterCheckbox").prop("checked")){
+            if($(this).find(".status").text() != "New") {
+                $(this).hide();
+            } else {
+                $(this).show();
+            } 
+        } else 
+        {
+            $(this).show();
+        }
+    });
+    }
+
+    //translate status codes and color lines
+    $( "table>tbody>tr" ).each(function( index ) {
+        switch($(this).find(".status").text()) {
+            case "-1":
+                $(this).find(".status").text("Declined");
+                $(this).addClass("declined");
+                break;
+            case "1":
+                $(this).find(".status").text("Accepted");
+                $(this).addClass("accepted");
+                break;
+            default:
+                $(this).find(".status").text("New");
+                $(this).addClass("new");
+        }
+    });
+
+    filter();
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    th{
+        font-weight: normal;
+    }
+    .accepted{
+        background-color: #AEDCAE;
+    }
+    .declined{
+        background-color: #ECA9A7;
+    }
+    .new{
+        background-color: #ADE0EE;
+    }
+</style>
+{% endblock %}

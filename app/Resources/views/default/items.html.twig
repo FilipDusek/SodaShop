@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<ul class="list-group">  
+	{% for tuple in tuples %}
+		<div class="clickable list-group-item">
+			<span class="badge">{{ tuple.thing.item.price }} DKK</span>
+			<h4>
+				{{ tuple.thing.item.name}}
+			</h4>
+			<div>
+				{{ tuple.thing.item.onStock}} on stock
+			</div>
+			<div>
+				{{ tuple.thing.item.description}}
+			</div>
+			<span class="order btn btn-default" style="float: right;">Order</span>
+		</div>
+	    <div class="popform well well-sm" style="display: none;">
+	    	<div class="formContainer">
+					{{ form_start(tuple.form) }}
+					{{ form_widget(tuple.form) }}
+					{{ form_end(tuple.form) }}
+			</div>
+	    </div>     
+	{% endfor %} 
+</ul>
+<a id="adminLogin" href="/admin/">Are you an admin?</a>
+{% endblock %}
+
+
+{% block stylesheets %}
+<style>
+.popform.well{
+	margin-bottom: 0px;
+}
+
+.formContainer{
+	margin-top: 10px;
+}
+
+input, textarea{
+	width: 5em;
+}
+
+div>button{
+	margin-top: 20px;
+}
+
+label{
+	margin-right: 20px;
+	width: 10em;
+}
+
+span.order{
+	float: right;
+    margin-top: -3em;
+}
+
+#adminLogin{
+	margin-top: 10px;
+}
+</style>
+{% endblock %}

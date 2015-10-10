@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/admin/">Soda Shop</a>
+        </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-5">
+			<a class="btn btn-default navbar-btn" href="/admin/add/">Add new item</a>
+			<a class="btn btn-default navbar-btn" href="/admin/orders/">View orders</a>
+			<a class="btn btn-default navbar-btn" href="/admin/items/">View items</a>
+    </div>
+</nav>
+
+<ul class="list-group">  
+	{% for tuple in tuples %}
+		<a class="clickable list-group-item" href="#">
+			<span class="badge">{{ tuple.thing.price }} DKK</span>
+			<h4>
+				{{ tuple.thing.name}}
+			</h4>
+			<div>
+				{{ tuple.thing.description}}
+			</div>
+		</a>
+	    <div class="popform well well-sm" style="display: none;">
+	    	<div class="formContainer">
+					{{ form_start(tuple.form) }}
+					{{ form_widget(tuple.form) }}
+					{{ form_end(tuple.form) }}
+					<a href="delete/{{ tuple.thing.id }}" class="btn btn-default">Delete</a>
+			</div>
+
+	    </div>     
+	{% endfor %} 
+</ul>
+
+<ol class="breadcrumb">
+  <li><a href="/admin/">Admin</a></li>
+  <li><a href="#">Items</a></li>
+</ol>
+
+{% endblock %}
